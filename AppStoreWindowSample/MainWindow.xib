@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
+            <connections>
+                <outlet property="centerFullScreenButton" destination="rtQ-eh-k1V" id="toi-0X-MYj"/>
+                <outlet property="centerTrafficLightButton" destination="1ef-hl-2i7" id="rD4-nL-5R6"/>
+                <outlet property="fullScreenRightMarginSlider" destination="HsU-ey-7ka" id="QsY-It-t8G"/>
+                <outlet property="showBaselineSeparatorButton" destination="RG7-Ef-bno" id="CJn-00-lnu"/>
+                <outlet property="texturedWindowButton" destination="Vsa-hc-ADu" id="wOU-bM-M4V"/>
+                <outlet property="titleBarHeightSlider" destination="AEf-lh-0Q7" id="B5N-fS-tTg"/>
+                <outlet property="trafficLightLeftMarginSlider" destination="w1A-MP-hmb" id="mZd-WN-29G"/>
+                <outlet property="trafficLightSeparationSlider" destination="Zr0-Ue-5bz" id="o2J-WE-yZU"/>
+                <outlet property="verticalTrafficLightButton" destination="rIx-5X-6px" id="ENL-az-0fL"/>
+                <outlet property="verticallyCenterTitleButton" destination="nOP-O8-VzU" id="R3o-bE-LQq"/>
+                <outlet property="window" destination="2" id="6"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="2" customClass="MainWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="74" width="480" height="482"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <view key="contentView" id="3">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="482"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-eh-k1V">
+                        <rect key="frame" x="140" y="446" width="182" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Center Full Screen Button" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="7DJ-75-LvP">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="Mww-ft-IfF"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="1ef-hl-2i7">
+                        <rect key="frame" x="140" y="406" width="195" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Center Traffic Light Buttons" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="kpQ-yC-jxR">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="R0B-2p-dGY"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="RG7-Ef-bno">
+                        <rect key="frame" x="140" y="426" width="181" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Shows Baseline Separator" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="5ca-Uc-GIF">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="ot7-XI-1cp"/>
+                        </connections>
+                    </button>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w1A-MP-hmb">
+                        <rect key="frame" x="128" y="237" width="225" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="221" id="uhO-fC-dbF"/>
+                        </constraints>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="40" doubleValue="10" tickMarkPosition="above" sliderType="linear" id="rr9-Jy-ZBc"/>
+                        <connections>
+                            <action selector="sliderAction:" target="-2" id="Z2i-wT-pGR"/>
+                        </connections>
+                    </slider>
+                    <slider verticalHuggingPriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="HsU-ey-7ka">
+                        <rect key="frame" x="128" y="189" width="225" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="40" doubleValue="10" tickMarkPosition="above" sliderType="linear" id="RZg-RT-4U2"/>
+                        <connections>
+                            <action selector="sliderAction:" target="-2" id="BeL-uP-P3i"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m94-Ei-J6M">
+                        <rect key="frame" x="127" y="216" width="159" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Full Screen Right Margin" id="tYm-tT-FX6">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="82Y-Xd-vtk">
+                        <rect key="frame" x="127" y="260" width="161" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Traffic Lights Left Margin" id="If8-1m-tX0">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="rIx-5X-6px">
+                        <rect key="frame" x="140" y="386" width="200" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Vertical Traffic Light Buttons" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ypK-eO-VX2">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="0rv-uf-ET3"/>
+                        </connections>
+                    </button>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zr0-Ue-5bz">
+                        <rect key="frame" x="128" y="139" width="225" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="40" doubleValue="10" tickMarkPosition="above" sliderType="linear" id="3cN-pu-qUD"/>
+                        <connections>
+                            <action selector="sliderAction:" target="-2" id="mSp-2A-Q16"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0EJ-8F-IJr">
+                        <rect key="frame" x="127" y="166" width="158" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="154" id="oXQ-2z-QUz"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Traffic Lights Separation" id="jml-oW-bVG">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="nOP-O8-VzU">
+                        <rect key="frame" x="140" y="366" width="157" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Vertically Center Title" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q9f-rJ-mAC">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="5fg-HO-zOG"/>
+                        </connections>
+                    </button>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AEf-lh-0Q7">
+                        <rect key="frame" x="127" y="283" width="225" height="20"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="221" id="Nkk-ae-Ut1"/>
+                        </constraints>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="22" maxValue="120" doubleValue="60" tickMarkPosition="above" sliderType="linear" id="CVK-Zv-B71"/>
+                        <connections>
+                            <action selector="sliderAction:" target="-2" id="Zum-a5-HFX"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tCm-Gj-UGw">
+                        <rect key="frame" x="126" y="310" width="102" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title Bar Height" id="g3q-lw-d6h">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-hc-ADu">
+                        <rect key="frame" x="140" y="346" width="131" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Textured Window" bezelStyle="regularSquare" imagePosition="left" inset="2" id="P8b-Lv-CNW">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkboxAction:" target="-2" id="sT8-TW-tog"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="leading" secondItem="1ef-hl-2i7" secondAttribute="leading" id="0RR-X8-mgw"/>
+                    <constraint firstItem="rIx-5X-6px" firstAttribute="centerX" secondItem="w1A-MP-hmb" secondAttribute="centerX" id="0hh-tS-LVC"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="centerX" secondItem="m94-Ei-J6M" secondAttribute="centerX" id="4RG-b1-J1H"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="leading" secondItem="AEf-lh-0Q7" secondAttribute="leading" id="8S9-ch-FPA"/>
+                    <constraint firstItem="Zr0-Ue-5bz" firstAttribute="leading" secondItem="w1A-MP-hmb" secondAttribute="leading" id="9xz-v4-bSt"/>
+                    <constraint firstAttribute="bottom" secondItem="Zr0-Ue-5bz" secondAttribute="bottom" constant="141" id="BdM-UB-qoa"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="top" secondItem="HsU-ey-7ka" secondAttribute="bottom" constant="8" symbolic="YES" id="GtM-Fh-8BM"/>
+                    <constraint firstItem="m94-Ei-J6M" firstAttribute="top" secondItem="w1A-MP-hmb" secondAttribute="bottom" constant="6" id="HMg-Lv-4zD"/>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="leading" secondItem="RG7-Ef-bno" secondAttribute="leading" id="HWE-ru-ttv"/>
+                    <constraint firstItem="82Y-Xd-vtk" firstAttribute="top" secondItem="AEf-lh-0Q7" secondAttribute="bottom" constant="8" symbolic="YES" id="Jb5-V1-wOc"/>
+                    <constraint firstItem="AEf-lh-0Q7" firstAttribute="top" secondItem="tCm-Gj-UGw" secondAttribute="bottom" constant="9" id="Jez-EH-7ti"/>
+                    <constraint firstItem="tCm-Gj-UGw" firstAttribute="top" secondItem="Vsa-hc-ADu" secondAttribute="bottom" constant="21" id="Kii-qv-gqK"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="leading" secondItem="m94-Ei-J6M" secondAttribute="leading" id="ODY-yi-chh"/>
+                    <constraint firstItem="HsU-ey-7ka" firstAttribute="top" secondItem="m94-Ei-J6M" secondAttribute="bottom" constant="8" symbolic="YES" id="RPd-Al-Nlf"/>
+                    <constraint firstItem="tCm-Gj-UGw" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="128" id="Sdm-yM-Ut3"/>
+                    <constraint firstItem="AEf-lh-0Q7" firstAttribute="top" secondItem="3" secondAttribute="top" constant="181" id="UoJ-fa-cZS"/>
+                    <constraint firstItem="rIx-5X-6px" firstAttribute="top" secondItem="1ef-hl-2i7" secondAttribute="bottom" constant="6" symbolic="YES" id="Uqb-UH-kxd"/>
+                    <constraint firstItem="Zr0-Ue-5bz" firstAttribute="top" secondItem="0EJ-8F-IJr" secondAttribute="bottom" constant="9" id="WS8-Pf-1jj"/>
+                    <constraint firstItem="Zr0-Ue-5bz" firstAttribute="leading" secondItem="HsU-ey-7ka" secondAttribute="leading" id="bQD-70-yEA"/>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="leading" secondItem="Vsa-hc-ADu" secondAttribute="leading" id="dWY-ww-2l2"/>
+                    <constraint firstItem="rIx-5X-6px" firstAttribute="centerX" secondItem="Zr0-Ue-5bz" secondAttribute="centerX" id="enP-qd-q6B"/>
+                    <constraint firstItem="nOP-O8-VzU" firstAttribute="top" secondItem="rIx-5X-6px" secondAttribute="bottom" constant="6" symbolic="YES" id="g80-ov-RED"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="leading" secondItem="82Y-Xd-vtk" secondAttribute="leading" id="h39-dc-tX4"/>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="leading" secondItem="rIx-5X-6px" secondAttribute="leading" id="ldK-NH-ttN"/>
+                    <constraint firstAttribute="centerX" secondItem="rtQ-eh-k1V" secondAttribute="centerX" constant="9" id="mIU-mT-VzD"/>
+                    <constraint firstItem="RG7-Ef-bno" firstAttribute="top" secondItem="rtQ-eh-k1V" secondAttribute="bottom" constant="6" symbolic="YES" id="rM8-Kk-XW2"/>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="leading" secondItem="nOP-O8-VzU" secondAttribute="leading" id="s4U-ZV-mhH"/>
+                    <constraint firstItem="0EJ-8F-IJr" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="129" id="wd6-4B-J4I"/>
+                    <constraint firstItem="rIx-5X-6px" firstAttribute="centerX" secondItem="HsU-ey-7ka" secondAttribute="centerX" id="wyH-1X-k9x"/>
+                    <constraint firstItem="rIx-5X-6px" firstAttribute="top" secondItem="3" secondAttribute="top" constant="80" id="xrw-pd-ERO"/>
+                    <constraint firstAttribute="bottom" secondItem="m94-Ei-J6M" secondAttribute="bottom" constant="216" id="yOf-es-CTS"/>
+                    <constraint firstItem="rtQ-eh-k1V" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" id="yci-O2-tLF"/>
+                    <constraint firstItem="HsU-ey-7ka" firstAttribute="top" secondItem="m94-Ei-J6M" secondAttribute="bottom" constant="8" id="zRP-nE-iFk"/>
+                </constraints>
+            </view>
+            <contentBorderThickness minY="40"/>
+        </window>
+    </objects>
+</document>
