@@ -10,4 +10,4 @@ Checkout AppStoreWindowSample on how to use this library. Basically, all you hav
 
 If you are using this library in one of your projects, please let me know [@ashokgelal](http://twitter.com/ashokgelal)
 
-For uptodate status of this project, seee: [https://github.com/ashokgelal/AppStoreWindow]()
+For uptodate status of this project, see: [https://github.com/ashokgelal/AppStoreWindow]()
