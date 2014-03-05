@@ -24,6 +24,7 @@
 using MonoMac.AppKit;
 using MonoMac.CoreGraphics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace AshokGelal.AppStoreWindow
 {
@@ -83,6 +84,21 @@ namespace AshokGelal.AppStoreWindow
         {
             return (window.StyleMask & NSWindowStyle.TexturedBackground) == NSWindowStyle.TexturedBackground;
         }
+    }
+
+    internal static class NSGraphicsExtensions
+    {
+        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSDrawWindowBackground")]
+        public extern static void DrawWindowBackground (RectangleF aRect);
+
+        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSSetFocusRingStyle")]
+        public extern static void SetFocusRingStyle (NSFocusRingPlacement placement);
+
+        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSDisableScreenUpdates")]
+        public extern static void DisableScreenUpdates ();
+
+        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSEnableScreenUpdates")]
+        public extern static void EnableScreenUpdates ();
     }
 
     public static class RectangleExtensions
