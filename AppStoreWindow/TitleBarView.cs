@@ -80,7 +80,7 @@ namespace AshokGelal.AppStoreWindow
                 }
                 window.SetAutorecalculatesContentBorderThickness(false, NSRectEdge.MaxYEdge);
                 window.SetContentBorderThickness(contentBorderThickness, NSRectEdge.MaxYEdge);
-                NSGraphics.DrawWindowBackground(drawingRect);
+                NSGraphicsExtensions.DrawWindowBackground(drawingRect);
             }
             else
             {
