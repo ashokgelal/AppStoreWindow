@@ -1,26 +1,14 @@
 ﻿<Properties>
   <AuthorInfo Name="Ashok Gelal" Email="ashokgelal@gmail.com" Copyright="Ashok Gelal" Company="" Trademark="" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AppStoreWindow/AppStoreWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppStoreWindowSample/MainWindow.cs">
     <Files>
-      <File FileName="AppStoreWindow/AppStoreWindow.cs" Line="903" Column="23" />
-      <File FileName="AppStoreWindow/TitleBarView.cs" Line="2" Column="21" />
-      <File FileName="AppStoreWindow/TitleBarContainer.cs" Line="12" Column="48" />
-      <File FileName="AppStoreWindowSample/AppDelegate.cs" Line="13" Column="13" />
+      <File FileName="AppStoreWindow/AppStoreWindow.cs" Line="387" Column="1" />
+      <File FileName="AppStoreWindow/TitleBarView.cs" Line="87" Column="54" />
+      <File FileName="AppStoreWindow/TitleBarContainer.cs" Line="1" Column="1" />
+      <File FileName="AppStoreWindowSample/AppDelegate.cs" Line="1" Column="1" />
+      <File FileName="AppStoreWindowSample/MainWindow.cs" Line="31" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="AppStoreWindow" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="AppStoreWindow.cs" selected="True" />
-          </Node>
-          <Node name="AppStoreWindowSample" expanded="True">
-            <Node name="References" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
