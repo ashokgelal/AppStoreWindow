@@ -22,13 +22,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 using AshokGelal.AppStoreWindow;
 
 namespace AppStoreWindowSample
 {
-    public partial class MainWindowController : MonoMac.AppKit.NSWindowController
+    public partial class MainWindowController : AppKit.NSWindowController
     {
         #region Properties
 
@@ -45,16 +45,19 @@ namespace AppStoreWindowSample
         #region Constructors
 
         // Called when created from unmanaged code
-        public MainWindowController(IntPtr handle) : base(handle)
+        public MainWindowController(IntPtr handle)
+            : base(handle)
         {
         }
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public MainWindowController(NSCoder coder) : base(coder)
+        public MainWindowController(NSCoder coder)
+            : base(coder)
         {
         }
         // Call to load from the XIB/NIB file
-        public MainWindowController() : base("MainWindow")
+        public MainWindowController()
+            : base("MainWindow")
         {
         }
 
@@ -71,7 +74,7 @@ namespace AppStoreWindowSample
 
         #endregion
 
-        partial void checkboxAction(MonoMac.Foundation.NSObject sender)
+        partial void checkboxAction(Foundation.NSObject sender)
         {
             var button = (NSButton)sender;
             var isChecked = button.State == NSCellStateValue.On;
@@ -115,7 +118,7 @@ namespace AppStoreWindowSample
 
         }
 
-        partial void sliderAction(MonoMac.Foundation.NSObject sender)
+        partial void sliderAction(Foundation.NSObject sender)
         {
             var slider = (NSSlider)sender;
             var value = (float)slider.DoubleValue;

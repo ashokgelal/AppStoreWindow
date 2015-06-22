@@ -21,16 +21,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
-using System.Drawing;
+using AppKit;
+using CoreGraphics;
 using System.Runtime.InteropServices;
+using ObjCRuntime;
+using System;
 
 namespace AshokGelal.AppStoreWindow
 {
     internal static class DrawingHelper
     {
-        internal static CGPath CreateClippingPath(RectangleF rect, float radius)
+        internal static CGPath CreateClippingPath(CGRect rect, float radius)
         {
             var path = new CGPath();
             path.MoveToPoint(rect.GetMinX(), rect.GetMinY());
@@ -46,7 +47,7 @@ namespace AshokGelal.AppStoreWindow
 
         internal static CGGradient CreateGraidentWithColors(NSColor startingColor, NSColor endingColor)
         {
-            var locations = new[] { 0.0f, 1.0f };
+            var locations = new nfloat[] { 0.0f, 1.0f };
             var cgStartingcolor = startingColor.CGColor;
             var cgEndingColor = endingColor.CGColor;
             var colors = new[] { cgStartingcolor, cgEndingColor };
@@ -88,22 +89,22 @@ namespace AshokGelal.AppStoreWindow
 
     internal static class NSGraphicsExtensions
     {
-        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSDrawWindowBackground")]
-        public extern static void DrawWindowBackground (RectangleF aRect);
+        [DllImport(Constants.AppKitLibrary, EntryPoint = "NSDrawWindowBackground")]
+        public extern static void DrawWindowBackground(CGRect aRect);
 
-        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSSetFocusRingStyle")]
-        public extern static void SetFocusRingStyle (NSFocusRingPlacement placement);
+        [DllImport(Constants.AppKitLibrary, EntryPoint = "NSSetFocusRingStyle")]
+        public extern static void SetFocusRingStyle(NSFocusRingPlacement placement);
 
-        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSDisableScreenUpdates")]
-        public extern static void DisableScreenUpdates ();
+        [DllImport(Constants.AppKitLibrary, EntryPoint = "NSDisableScreenUpdates")]
+        public extern static void DisableScreenUpdates();
 
-        [DllImport (MonoMac.Constants.AppKitLibrary, EntryPoint="NSEnableScreenUpdates")]
-        public extern static void EnableScreenUpdates ();
+        [DllImport(Constants.AppKitLibrary, EntryPoint = "NSEnableScreenUpdates")]
+        public extern static void EnableScreenUpdates();
     }
 
     public static class RectangleExtensions
     {
-        public static float GetMidHeight(this RectangleF rect)
+        public static nfloat GetMidHeight(this CGRect rect)
         {
             return rect.Height * 0.5f;
         }

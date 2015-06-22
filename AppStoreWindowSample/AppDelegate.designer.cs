@@ -1,10 +1,7 @@
-﻿
-namespace AppStoreWindowSample
+﻿namespace AppStoreWindowSample
 {
-    // Should subclass MonoMac.AppKit.NSResponder
-    [MonoMac.Foundation.Register("AppDelegate")]
-    public partial class AppDelegate
-    {
-    }
+   [global::Foundation.Register("AppDelegate")]
+   public partial class AppDelegate
+   {
+   }
 }
-

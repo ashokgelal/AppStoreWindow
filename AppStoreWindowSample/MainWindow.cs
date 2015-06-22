@@ -22,10 +22,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using MonoMac.Foundation;
+using Foundation;
 using AshokGelal.AppStoreWindow;
-using MonoMac.OpenGL;
-using MonoMac.AppKit;
+using AppKit;
 
 namespace AppStoreWindowSample
 {
@@ -34,13 +33,15 @@ namespace AppStoreWindowSample
         #region Constructors
 
         // Called when created from unmanaged code
-        public MainWindow(IntPtr handle) : base(handle)
+        public MainWindow(IntPtr handle)
+            : base(handle)
         {
             Initialize();
         }
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public MainWindow(NSCoder coder) : base(coder)
+        public MainWindow(NSCoder coder)
+            : base(coder)
         {
             Initialize();
         }

@@ -22,13 +22,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Drawing;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
+using AppKit;
+using Foundation;
+using CoreGraphics;
 
 namespace AshokGelal.AppStoreWindow
 {
-    public partial class WindowButton : MonoMac.AppKit.NSButton
+    public partial class WindowButton : AppKit.NSButton
     {
         #region Fields
 
@@ -110,18 +110,21 @@ namespace AshokGelal.AppStoreWindow
         #region Constructors
 
         // Called when created from unmanaged code
-        public WindowButton(IntPtr handle) : base(handle)
+        public WindowButton(IntPtr handle)
+            : base(handle)
         {
             Initialize();
         }
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public WindowButton(NSCoder coder) : base(coder)
+        public WindowButton(NSCoder coder)
+            : base(coder)
         {
             Initialize();
         }
 
-        public WindowButton(SizeF size, string groupIdentifier) : base(new RectangleF(0, 0, size.Width, size.Height))
+        public WindowButton(CGSize size, string groupIdentifier)
+            : base(new CGRect(0, 0, size.Width, size.Height))
         {
             GroupIdentifier = groupIdentifier;
             Initialize();
@@ -136,7 +139,7 @@ namespace AshokGelal.AppStoreWindow
             SetButtonType(NSButtonType.MomentaryChange);
             Bordered = false;
             Title = string.Empty;
-            Cell.HighlightsBy = (int)NSCellMask.ContentsCell;
+            Cell.HighlightsBy = (int)NSCellStyleMask.ContentsCell;
             Cell.ImageDimsWhenDisabled = false;
         }
 
@@ -148,7 +151,7 @@ namespace AshokGelal.AppStoreWindow
                 RemoveTrackingArea(_mouseTrackingArea);
             }
 
-            _mouseTrackingArea = new NSTrackingArea(new RectangleF(-4, -4, Bounds.Width, Bounds.Height), 
+            _mouseTrackingArea = new NSTrackingArea(new CGRect(-4, -4, Bounds.Width, Bounds.Height), 
                 NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways,
                 this, null
             );

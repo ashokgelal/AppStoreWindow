@@ -22,10 +22,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Drawing;
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
-using MonoMac.Foundation;
+using AppKit;
+using CoreGraphics;
+using Foundation;
 
 namespace AshokGelal.AppStoreWindow
 {
@@ -35,21 +34,22 @@ namespace AshokGelal.AppStoreWindow
     public class TitleBarView : NSView
     {
         private const float CORNER_CLIP_RADIUS = 4.0f;
-        private SizeF TITLE_DOCUMENT_BUTTON_OFFSET = new SizeF(4.0f, 1.0f);
+        private CGSize TITLE_DOCUMENT_BUTTON_OFFSET = new CGSize(4.0f, 1.0f);
         private const float TITLE_VERSIONS_BUTTON_OFFSET = -1.0f;
         private const float TITLE_DOCUMENT_STATUS_X_OFFSET = -20.0f;
-        private SizeF TITLE_MARGINS = new SizeF(8.0f, 2.0f);
+        private CGSize TITLE_MARGINS = new CGSize(8.0f, 2.0f);
         private CGImage _noiseImageRef;
 
-        private RectangleF BaselineSeparatorFrame
+        private CGRect BaselineSeparatorFrame
         {
             get
             {
-                return new RectangleF(0, Bounds.GetMinY(), Bounds.Width, 1);
+                return new CGRect(0, Bounds.GetMinY(), Bounds.Width, 1);
             }
         }
 
-        public TitleBarView(RectangleF empty) : base(empty)
+        public TitleBarView(CGRect empty)
+            : base(empty)
         {
         }
 
@@ -66,7 +66,7 @@ namespace AshokGelal.AppStoreWindow
             }
         }
 
-        private void DrawWindowBackgroundGradient(RectangleF drawingRect, CGPath clippingPath)
+        private void DrawWindowBackgroundGradient(CGRect drawingRect, CGPath clippingPath)
         {
             var window = (AppStoreWindow)Window;
             clippingPath.ApplyClippingPathInCurrentContext();
@@ -96,11 +96,11 @@ namespace AshokGelal.AppStoreWindow
 
                 var context = NSGraphicsContext.CurrentContext.GraphicsPort;
                 var gradient = DrawingHelper.CreateGraidentWithColors(startColor, endColor);
-                context.DrawLinearGradient(gradient, new PointF(drawingRect.GetMidX(), drawingRect.GetMinY()), new PointF(drawingRect.GetMidX(), drawingRect.GetMaxY()), 0);
+                context.DrawLinearGradient(gradient, new CGPoint(drawingRect.GetMidX(), drawingRect.GetMinY()), new CGPoint(drawingRect.GetMidX(), drawingRect.GetMaxY()), 0);
 
                 if (drawsAsMainWindow)
                 {
-                    var noiseRect = new RectangleF(1.0f, 1.0f, drawingRect.Width, drawingRect.Height);
+                    var noiseRect = new CGRect(1.0f, 1.0f, drawingRect.Width, drawingRect.Height);
 
                     if (window.ShowBaselineSeparator)
                     {
@@ -148,12 +148,12 @@ namespace AshokGelal.AppStoreWindow
             context.SetBlendMode(CGBlendMode.Screen);
             var scaleFactor = Window.BackingScaleFactor;
             context.ScaleCTM(1f / scaleFactor, 1f / scaleFactor);
-            var imageRect = new RectangleF(PointF.Empty, new SizeF(_noiseImageRef.Width, _noiseImageRef.Height));
+            var imageRect = new CGRect(CGPoint.Empty, new CGSize(_noiseImageRef.Width, _noiseImageRef.Height));
             context.DrawTiledImage(imageRect, _noiseImageRef);
             NSGraphicsContext.CurrentContext.RestoreGraphicsState();
         }
 
-        private void DrawBaselineSeparator(RectangleF separatorFrame)
+        private void DrawBaselineSeparator(CGRect separatorFrame)
         {
             var window = (AppStoreWindow)Window;
             var drawsAsMainWindow = window.DrawsAsMainWindow();
@@ -170,7 +170,7 @@ namespace AshokGelal.AppStoreWindow
             NSBezierPath.FromRect(separatorFrame).Fill();
         }
 
-        public override void DrawRect(RectangleF dirtyRect)
+        public override void DrawRect(CGRect dirtyRect)
         {
             var window = ((AppStoreWindow)Window);
             var drawsAsMainWindow = window.DrawsAsMainWindow();
@@ -216,7 +216,7 @@ namespace AshokGelal.AppStoreWindow
             }
         }
 
-        private RectangleF GetTitleFrame(out NSDictionary titleTextStyles, AppStoreWindow window)
+        private CGRect GetTitleFrame(out NSDictionary titleTextStyles, AppStoreWindow window)
         {
             var drawsAsMainWindow = window.DrawsAsMainWindow();
             var titleTextShadow = drawsAsMainWindow ? window.TitleTextShadow : window.InactiveTitleTextShadow;
@@ -225,7 +225,7 @@ namespace AshokGelal.AppStoreWindow
                 titleTextShadow = new NSShadow
                 {
                     ShadowBlurRadius = 0f,
-                    ShadowOffset = new SizeF(0f, -1.0f),
+                    ShadowOffset = new CGSize(0f, -1.0f),
                     ShadowColor = NSColor.FromDeviceWhite(1.0f, 0.5f),
                 };
             }
@@ -249,12 +249,12 @@ namespace AshokGelal.AppStoreWindow
                 },
                 new object[]
                 {
-                    NSAttributedString.FontAttributeName, NSAttributedString.ForegroundColorAttributeName,
-                    NSAttributedString.ShadowAttributeName, NSAttributedString.ParagraphStyleAttributeName
+                    NSStringAttributeKey.Font, NSStringAttributeKey.ForegroundColor,
+                    NSStringAttributeKey.Shadow, NSStringAttributeKey.ParagraphStyle
                 });
 
             var titleSize = new NSAttributedString(window.Title, titleTextStyles).Size;
-            var titleTextRect = new RectangleF(0, 0, titleSize.Width, titleSize.Height);
+            var titleTextRect = new CGRect(0, 0, titleSize.Width, titleSize.Height);
 
             var docIconButton = window.StandardWindowButton(NSWindowButton.DocumentIconButton);
             var versionButton = window.StandardWindowButton(NSWindowButton.DocumentVersionsButton);
@@ -286,9 +286,9 @@ namespace AshokGelal.AppStoreWindow
                 var minimizeMaxX = minimizeButton == null ? 0f : minimizeButton.Frame.GetMaxX();
                 var zoomMaxX = zoomButton == null ? 0f : zoomButton.Frame.GetMaxX();
 
-                var adjustedX = Math.Max(Math.Max(closeMaxX, minimizeMaxX), zoomMaxX) + TITLE_MARGINS.Width;
+                var adjustedX = NMath.Max(NMath.Max(closeMaxX, minimizeMaxX), zoomMaxX) + TITLE_MARGINS.Width;
                 var proposedX = Bounds.GetMidX() - titleSize.Width / 2f;
-                titleTextRect.X = Math.Max(proposedX, adjustedX);
+                titleTextRect.X = NMath.Max(proposedX, adjustedX);
             }
             else
             {

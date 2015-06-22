@@ -21,8 +21,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using MonoMac.AppKit;
-using MonoMac.Foundation;
+using System;
+
+using Foundation;
+using AppKit;
 
 namespace AppStoreWindowSample
 {
@@ -30,11 +32,10 @@ namespace AppStoreWindowSample
     {
         MainWindowController _mainWindowController;
 
-        public override void FinishedLaunching(NSObject notification)
+        public override void DidFinishLaunching(NSNotification notification)
         {
             _mainWindowController = new MainWindowController();
             _mainWindowController.Window.MakeKeyAndOrderFront(this);
         }
     }
 }
-

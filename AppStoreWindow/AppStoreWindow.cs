@@ -22,12 +22,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
-using MonoMac.Foundation;
+using AppKit;
+using CoreGraphics;
+using Foundation;
 using System;
 using System.Diagnostics.Contracts;
-using System.Drawing;
 using System.Linq;
 
 namespace AshokGelal.AppStoreWindow
@@ -45,14 +44,14 @@ namespace AshokGelal.AppStoreWindow
         private const float WINDOW_DOCUMENT_VERSIONS_BUTTON_ORIGIN_Y = 2.0f;
         private const float WINDOW_DOCUMENT_VERSIONS_DIVIDER_ORIGIN_Y = 2.0f;
         private const float EPSILON = 0.0000001f;
-        private float _cachedTitleBarHeight;
+        private nfloat _cachedTitleBarHeight;
         private bool _centerFullScreenButton;
         private bool _centerTrafficLightButtons;
         private WindowButton _closeButton;
         private WindowButton _fullScreenButton;
-        private float _fullScreenButtonRightMargin;
+        private nfloat _fullScreenButtonRightMargin;
         private WindowButton _minimizeButton;
-        private float _minimumTitleBarHeight;
+        private nfloat _minimumTitleBarHeight;
         private bool _preventWindowFrameChange;
         private NSUrl _representedUrl;
         private bool _setFullScreenButtonRightMargin;
@@ -60,11 +59,11 @@ namespace AshokGelal.AppStoreWindow
         private bool _showsDocumentProxyIcon;
         private bool _showsTitle;
         private TitleBarContainer _titleBarContainer;
-        private float _titleBarHeight;
-        private NSView _titleBarView;
-        private float _trafficLightButtonsLeftMargin;
-        private float _trafficLightLeftMargin;
-        private float _trafficLightSeparation;
+        private nfloat _titleBarHeight;
+        private TitleBarView _titleBarView;
+        private nfloat _trafficLightButtonsLeftMargin;
+        private nfloat _trafficLightLeftMargin;
+        private nfloat _trafficLightSeparation;
         private bool _verticalTrafficLightButtons;
         private bool _verticallyCenterTitle;
         private WindowButton _zoomButton;
@@ -77,13 +76,13 @@ namespace AshokGelal.AppStoreWindow
         /// Gets or sets the title bar drawing callback action to implement custon drawing code for a windows' title bar.
         /// </summary>
         /// <value>The title bar drawing callback action.</value>
-        public Action<bool, RectangleF, CGPath> TitleBarDrawingCallbackAction { get; set; }
+        public Action<bool, CGRect, CGPath> TitleBarDrawingCallbackAction { get; set; }
 
         /// <summary>
         /// Gets or sets the height of the title bar. By default, this is set to the standard title bar height.
         /// </summary>
         /// <value>The height of the title bar.</value>
-        public float TitleBarHeight
+        public nfloat TitleBarHeight
         {
             get { return _titleBarHeight; }
             set { SetTitleBarHeight(value, true); }
@@ -95,7 +94,7 @@ namespace AshokGelal.AppStoreWindow
         /// This view can also be set if you want to use a different style title bar from the default one (textured, etc.).
         /// </summary>
         /// <value>The title bar view.</value>
-        public NSView TitleBarView
+        public TitleBarView TitleBarView
         {
             get { return _titleBarView; }
             set
@@ -205,7 +204,7 @@ namespace AshokGelal.AppStoreWindow
         /// Gets or sets the distance between the traffic light buttons and the left edge of the window.
         /// </summary>
         /// <value>The traffic light buttons left margin.</value>
-        public float TrafficLightButtonsLeftMargin
+        public nfloat TrafficLightButtonsLeftMargin
         {
             get { return _trafficLightButtonsLeftMargin; }
             set
@@ -223,13 +222,13 @@ namespace AshokGelal.AppStoreWindow
         /// Gets or sets the distance between the traffic light buttons and the top edge of the window.
         /// </summary>
         /// <value>The traffic light buttons top margin.</value>
-        public float TrafficLightButtonsTopMargin { get; set; }
+        public nfloat TrafficLightButtonsTopMargin { get; set; }
 
         /// <summary>
         /// Gets or sets the distance between the fullscreen button and the right edge of the window.
         /// </summary>
         /// <value>The full screen button right margin.</value>
-        public float FullScreenButtonRightMargin
+        public nfloat FullScreenButtonRightMargin
         {
             get { return _fullScreenButtonRightMargin; }
             set
@@ -302,7 +301,7 @@ namespace AshokGelal.AppStoreWindow
         /// Spacing between the traffic light buttons.
         /// </summary>
         /// <value>The traffic light separation.</value>
-        public float TrafficLightSeparation
+        public nfloat TrafficLightSeparation
         {
             get { return _trafficLightSeparation; }
             set
@@ -507,7 +506,7 @@ namespace AshokGelal.AppStoreWindow
         /// Gets or sets the max size of the window.
         /// </summary>
         /// <value>The size of the max.</value>
-        public override SizeF MaxSize
+        public override CGSize MaxSize
         {
             get { return base.MaxSize; }
             set
@@ -521,7 +520,7 @@ namespace AshokGelal.AppStoreWindow
         /// Gets or sets the minimum size of the window.
         /// </summary>
         /// <value>The minimum size.</value>
-        public override SizeF MinSize
+        public override CGSize MinSize
         {
             get { return base.MinSize; }
             set
@@ -588,14 +587,34 @@ namespace AshokGelal.AppStoreWindow
 
         #region Constructors
 
-        public AppStoreWindow(IntPtr handle) : base(handle)
+        public AppStoreWindow(IntPtr handle)
+            : base(handle)
         {
         }
 
         [Export("initWithCoder:")]
-        public AppStoreWindow(NSCoder coder) : base(coder)
+        public AppStoreWindow(NSCoder coder)
+            : base(coder)
         {
         }
+
+        public AppStoreWindow()
+            : base()
+        {
+         
+        }
+
+        public AppStoreWindow(CGRect contentRect, NSWindowStyle aStyle, NSBackingStore bufferingType, bool deferCreation)
+            : base(contentRect, aStyle, bufferingType, deferCreation)
+        {
+
+        }
+
+        public AppStoreWindow(CGRect contentRect, NSWindowStyle aStyle, NSBackingStore bufferingType, bool deferCreation, NSScreen screen)
+            : base(contentRect, aStyle, bufferingType, deferCreation, screen)
+        {
+        }
+
 
         public override void AwakeFromNib()
         {
@@ -624,11 +643,11 @@ namespace AshokGelal.AppStoreWindow
 
         private void CreateTitlebarView()
         {
-            var container = new TitleBarContainer(RectangleF.Empty);
+            var container = new TitleBarContainer(CGRect.Empty);
             var firstSubView = ThemeFrameView.Subviews[0];
             ThemeFrameView.AddSubview(container, NSWindowOrderingMode.Below, firstSubView);
             _titleBarContainer = container;
-            TitleBarView = new TitleBarView(RectangleF.Empty);
+            TitleBarView = new TitleBarView(CGRect.Empty);
         }
 
         private void RecalculateFrameForTitleBarContainer()
@@ -636,32 +655,28 @@ namespace AshokGelal.AppStoreWindow
             if (_titleBarContainer == null)
                 return;
             var themeFrameRect = ThemeFrameView.Frame;
-            var titleFrame = new RectangleF(0f, themeFrameRect.GetMaxY() - TitleBarHeight, themeFrameRect.Width, TitleBarHeight);
+            var titleFrame = new CGRect(0f, themeFrameRect.GetMaxY() - TitleBarHeight, themeFrameRect.Width, TitleBarHeight);
             _titleBarContainer.Frame = titleFrame;
         }
 
         private void HookInitialEvents()
         {
             DidResize += AppStoreWindow_DidResize;
-            DidMoved += AppStoreWindow_DidMoved;
+            DidMove += AppStoreWindow_DidMoved;
             DidEndSheet += AppStoreWindow_DidEndSheet;
             DidExitFullScreen += AppStoreWindow_DidExitFullScreen;
             WillEnterFullScreen += AppStoreWindow_WillEnterFullScreen;
             WillExitFullScreen += AppStoreWindow_WillExitFullScreen;
-            NSApplication.SharedApplication.DidBecomeActive += SharedApplication_DidBecomeActive;
-            NSApplication.SharedApplication.DidResignActive += SharedApplication_DidResignActive;
         }
 
         private void UnhookInitialEvents()
         {
             DidResize -= AppStoreWindow_DidResize;
-            DidMoved -= AppStoreWindow_DidMoved;
+            DidMove -= AppStoreWindow_DidMoved;
             DidEndSheet -= AppStoreWindow_DidEndSheet;
             DidExitFullScreen -= AppStoreWindow_DidExitFullScreen;
             WillEnterFullScreen -= AppStoreWindow_WillEnterFullScreen;
             WillExitFullScreen -= AppStoreWindow_WillExitFullScreen;
-            NSApplication.SharedApplication.DidBecomeActive -= SharedApplication_DidBecomeActive;
-            NSApplication.SharedApplication.DidResignActive -= SharedApplication_DidResignActive;
         }
 
         protected void AppStoreWindow_WillExitFullScreen(object sender, EventArgs e)
@@ -690,16 +705,6 @@ namespace AshokGelal.AppStoreWindow
             SetupTrafficLightsTrackingArea();
         }
 
-        protected void SharedApplication_DidResignActive(object sender, EventArgs e)
-        {
-            UpdateTitlebarView();
-        }
-
-        protected void SharedApplication_DidBecomeActive(object sender, EventArgs e)
-        {
-            UpdateTitlebarView();
-        }
-
         protected void AppStoreWindow_DidEndSheet(object sender, EventArgs e)
         {
             LayoutTrafficLightsAndContent();
@@ -715,7 +720,7 @@ namespace AshokGelal.AppStoreWindow
             LayoutTrafficLightsAndContent();
         }
 
-        private float DefaultTrafficLightLeftMargin()
+        private nfloat DefaultTrafficLightLeftMargin()
         {
             if (Math.Abs(_trafficLightLeftMargin - default(float)) < EPSILON)
             {
@@ -725,7 +730,7 @@ namespace AshokGelal.AppStoreWindow
             return _trafficLightLeftMargin;
         }
 
-        internal float MinimumTitleBarHeight()
+        internal nfloat MinimumTitleBarHeight()
         {
             if (Math.Abs(_minimumTitleBarHeight - default(float)) < EPSILON)
             {
@@ -756,7 +761,7 @@ namespace AshokGelal.AppStoreWindow
             ToggleFullScreen(this);
         }
 
-        public override void SetFrame(RectangleF frameRect, bool display)
+        public override void SetFrame(CGRect frameRect, bool display)
         {
             if (!_preventWindowFrameChange)
             {
@@ -764,7 +769,7 @@ namespace AshokGelal.AppStoreWindow
             }
         }
 
-        public override void SetFrame(RectangleF frameRect, bool display, bool animate)
+        public override void SetFrame(CGRect frameRect, bool display, bool animate)
         {
             if (!_preventWindowFrameChange)
             {
@@ -814,7 +819,7 @@ namespace AshokGelal.AppStoreWindow
             var minimizeFrame = minimize.Frame;
             var zoomFrame = zoom.Frame;
             var titleBarFrame = _titleBarContainer.Frame;
-            float buttonOrigin;
+            nfloat buttonOrigin;
 
             if (!VerticalTrafficLightButtons)
             {
@@ -827,9 +832,9 @@ namespace AshokGelal.AppStoreWindow
                     buttonOrigin = titleBarFrame.GetMaxY() - closeFrame.Height - TrafficLightButtonsTopMargin;
                 }
 
-                closeFrame.Location = new PointF(TrafficLightButtonsLeftMargin, buttonOrigin);
-                minimizeFrame.Location = new PointF(closeFrame.GetMaxX() + TrafficLightSeparation, buttonOrigin);
-                zoomFrame.Location = new PointF(minimizeFrame.GetMaxX() + TrafficLightSeparation, buttonOrigin);
+                closeFrame.Location = new CGPoint(TrafficLightButtonsLeftMargin, buttonOrigin);
+                minimizeFrame.Location = new CGPoint(closeFrame.GetMaxX() + TrafficLightSeparation, buttonOrigin);
+                zoomFrame.Location = new CGPoint(minimizeFrame.GetMaxX() + TrafficLightSeparation, buttonOrigin);
             }
             else
             {
@@ -843,10 +848,10 @@ namespace AshokGelal.AppStoreWindow
                 {
                     buttonOrigin = titleBarFrame.GetMaxY() - groupHeight - TrafficLightButtonsTopMargin;
                 }
-                zoomFrame.Location = new PointF(TrafficLightButtonsLeftMargin, buttonOrigin);
-                minimizeFrame.Location = new PointF(TrafficLightButtonsLeftMargin,
+                zoomFrame.Location = new CGPoint(TrafficLightButtonsLeftMargin, buttonOrigin);
+                minimizeFrame.Location = new CGPoint(TrafficLightButtonsLeftMargin,
                     zoomFrame.GetMaxY() + TrafficLightSeparation - 2f);
-                closeFrame.Location = new PointF(TrafficLightButtonsLeftMargin,
+                closeFrame.Location = new CGPoint(TrafficLightButtonsLeftMargin,
                     minimizeFrame.GetMaxY() + TrafficLightSeparation - 2f);
             }
 
@@ -861,7 +866,7 @@ namespace AshokGelal.AppStoreWindow
 
                 if (VerticallyCenterTitle)
                 {
-                    docButtonIconFrame.Y = (float)Math.Floor(titleBarFrame.GetMidY() - docButtonIconFrame.GetMidHeight());
+                    docButtonIconFrame.Y = (nfloat)Math.Floor(titleBarFrame.GetMidY() - docButtonIconFrame.GetMidHeight());
                 }
                 else
                 {
@@ -948,7 +953,7 @@ namespace AshokGelal.AppStoreWindow
             }
         }
 
-        private float DefaultTrafficLightSeparation()
+        private nfloat DefaultTrafficLightSeparation()
         {
             if (Math.Abs(_trafficLightSeparation - default(float)) < EPSILON)
             {
@@ -1016,12 +1021,12 @@ namespace AshokGelal.AppStoreWindow
             }
         }
 
-        private RectangleF ContentFrameView()
+        private CGRect ContentFrameView()
         {
             var windowFrame = Frame;
             var contentRect = ContentRectFor(windowFrame);
             contentRect.Height = windowFrame.Height - _titleBarHeight;
-            contentRect.Location = PointF.Empty;
+            contentRect.Location = CGPoint.Empty;
             return contentRect;
         }
 
@@ -1042,15 +1047,15 @@ namespace AshokGelal.AppStoreWindow
         /// </summary>
         /// <param name="newHeight">New height.</param>
         /// <param name="adjustWindowFrame">If set to <c>true</c> adjust window frame.</param>
-        public void SetTitleBarHeight(float newHeight, bool adjustWindowFrame)
+        public void SetTitleBarHeight(nfloat newHeight, bool adjustWindowFrame)
         {
             if (Math.Abs(_titleBarHeight - newHeight) < EPSILON)
                 return;
             var windowFrame = Frame;
             if (adjustWindowFrame)
             {
-                windowFrame.Location = new PointF(windowFrame.X, windowFrame.Y - newHeight - _titleBarHeight);
-                windowFrame.Size = new SizeF(windowFrame.Width, windowFrame.Height + newHeight - _titleBarHeight);
+                windowFrame.Location = new CGPoint(windowFrame.X, windowFrame.Y - newHeight - _titleBarHeight);
+                windowFrame.Size = new CGSize(windowFrame.Width, windowFrame.Height + newHeight - _titleBarHeight);
             }
 
             _titleBarHeight = _cachedTitleBarHeight = newHeight;
@@ -1063,7 +1068,7 @@ namespace AshokGelal.AppStoreWindow
                 ContentView.DisplayIfNeeded();
             }
             if (MinSize.Height < _titleBarHeight)
-                MinSize = new SizeF(MinSize.Width, _titleBarHeight);
+                MinSize = new CGSize(MinSize.Width, _titleBarHeight);
         }
 
         public static NSColor DefaultTitleBarStartColor(bool drawsAsMainWindow)
