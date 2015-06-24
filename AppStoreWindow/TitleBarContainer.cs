@@ -22,9 +22,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Drawing;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
+using AppKit;
+using Foundation;
+using CoreGraphics;
 
 namespace AshokGelal.AppStoreWindow
 {
@@ -32,7 +32,8 @@ namespace AshokGelal.AppStoreWindow
     {
         internal float MouseDragDetectionThreshold { get; set; }
 
-        internal TitleBarContainer(RectangleF frame) : base(frame)
+        internal TitleBarContainer(CGRect frame)
+            : base(frame)
         {
             MouseDragDetectionThreshold = 1;
         }
@@ -48,8 +49,8 @@ namespace AshokGelal.AppStoreWindow
 
             var @where = Window.ConvertBaseToScreen(theEvent.LocationInWindow);
             var origin = Window.Frame.Location;
-            var deltaX = 0.0f;
-            var deltaY = 0.0f;
+            nfloat deltaX = 0.0f;
+            nfloat deltaY = 0.0f;
 
             while ((theEvent != null) && (theEvent.Type != NSEventType.LeftMouseUp))
             {
